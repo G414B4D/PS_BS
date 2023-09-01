@@ -1,0 +1,22 @@
+function PrintChars {
+    param (
+        [Parameter(Mandatory=$true)]
+        [string]$FilePath
+    )
+
+    if (Test-Path $FilePath) {
+        $content = Get-Content -Path $FilePath -Raw
+
+        foreach ($char in $content.ToCharArray()) {
+            Write-Host $char -NoNewline
+            Start-Sleep -Milliseconds 100  # Pause for 100ms; adjust as needed
+        }
+
+        Write-Host ""  # Print a newline after completing the loop
+    } else {
+        Write-Error "File not found: $FilePath"
+    }
+}
+
+# Example usage:
+# PrintChars -FilePath "C:\path\to\your\file.txt"
